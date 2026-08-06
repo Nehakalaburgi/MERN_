@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Mood Badge</title>
+
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-color: #fac8fa;
+        transition: background-color 0.3s ease;
+      }
+
+      .card {
+        background: #f9e8e8;
+        width: min(90%, 430px);
+        padding: 28px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #f58fc2;
+        border-radius: 12px;
+        font-size: 1rem;
+        margin: 12px 0;
+        
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 12px 0;
+      }
+
+      button {
+        border: none;
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-size: 1rem;
+        cursor: pointer;
+        background: #dde2ea;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+      }
+
+      #emoji {
+        font-size: 3rem;
+        margin: 10px 0;
+      }
+
+      .small {
+        color: #365593;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h1>My Mood Badge</h1>
+
+      <input id="name-input" type="text" placeholder="Type your name" />
+
+      <div class="buttons">
+        <button id="happy-btn">😄 Happy</button>
+        <button id="cool-btn">😎 Cool</button>
+        <button id="sleepy-btn">😴 Sleepy</button>
+      </div>
+
+      <h2 id="message">Hello, friend!</h2>
+
+      <p id="emoji">🙂</p>
+
+      <p class="small">Clicks: <span id="count">0</span></p>
+    </div>
+    <script>
+       // console.log("Hello, friend!");
+        const nameInput = document.querySelector("#name-input");
+        const message = document.querySelector("#message");
+        let userName = "friend";
+        //function to update the greeting message
+        function updateGreeting() {
+          userName = nameInput.value.trim() || "friend";
+          message.textContent = `Hello, ${userName}!`;
+        }
+        updateGreeting();
+        nameInput.addEventListener("input", updateGreeting);
+
+        // nameInput.addEventListener("input", () => {
+        //   userName = nameInput.value.trim() || "friend";
+        //   message.textContent = `Hello, ${userName}!`;
+        // });
+        const emojiDisplay = document.querySelector("#emoji");
+        const countDisplay = document.querySelector("#count");
+        let clickCount = 0;
+        let currentMood = "🙂"; // Default mood
+        buttons = {
+          happy: document.querySelector("#happy-btn"),
+          cool: document.querySelector("#cool-btn"),
+          sleepy: document.querySelector("#sleepy-btn"),
+        };
+        buttons.happy.addEventListener("click", () => {
+          currentMood = "😄";
+          emojiDisplay.textContent = currentMood;
+          clickCount++;
+          countDisplay.textContent = clickCount;
+          //change text after clicking happy button
+
+          message.textContent = `Hello, ${userName}! You look happy today!`;
+          //change color of card based on mood
+            document.querySelector(".card").style.backgroundColor = "hsl(330, 96%, 81%)"; // Happy color
+        });
+        buttons.cool.addEventListener("click", () => {
+          currentMood = "😎";
+          emojiDisplay.textContent = currentMood;
+          clickCount++;
+          countDisplay.textContent = clickCount;
+            message.textContent = `Hello, ${userName}! You look cool today!`;
+            document.querySelector(".card").style.backgroundColor = "#e0f7fa"; // Cool color
+        });
+        buttons.sleepy.addEventListener("click", () => {
+          currentMood = "😴";
+          emojiDisplay.textContent = currentMood;
+          clickCount++;
+          countDisplay.textContent = clickCount;
+            message.textContent = `Hello, ${userName}! You look sleepy today!`;
+            document.querySelector(".card").style.backgroundColor = "#f3e5f5"; // Sleepy color
+        });
+
+
+    </script>
+  </body>
+</html>
